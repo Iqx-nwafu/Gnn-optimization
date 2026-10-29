@@ -1,0 +1,590 @@
+{
+ "t1": {
+  "cap_cn": "表1  自压滴灌系统设计参数与管网参数",
+  "cap_en": "Table 1  Design and pipe-network parameters of the self-pressure drip irrigation system",
+  "widths": [
+   3300,
+   1590
+  ],
+  "header": [
+   [
+    "参数\nParameter",
+    "数值\nValue"
+   ]
+  ],
+  "rows": [
+   [
+    "灌溉水利用系数\nIrrigation water use coefficient",
+    "0.9"
+   ],
+   [
+    "土壤含水量设计上限\nDesign upper limit of soil water content/%",
+    "90"
+   ],
+   [
+    "土壤含水量设计下限\nDesign lower limit of soil water content/%",
+    "70"
+   ],
+   [
+    "计划湿润层深度\nPlanned wetting layer depth/cm",
+    "50"
+   ],
+   [
+    "田间持水量\nField capacity/%",
+    "28"
+   ],
+   [
+    "设计土壤湿度比\nDesign soil moisture ratio/%",
+    "75"
+   ],
+   [
+    "设计用水强度\nDesign water consumption intensity/(mm·d⁻¹)",
+    "6"
+   ],
+   [
+    "节点数/管段数\nNumber of nodes/pipes",
+    "71/70"
+   ],
+   [
+    "干管管材与管径\nMain pipe material and diameter/mm",
+    "UPVC, 250"
+   ],
+   [
+    "支管管材与管径\nBranch pipe material and diameter/mm",
+    "PE, 160"
+   ],
+   [
+    "管段长度\nPipe length/m",
+    "50~100"
+   ],
+   [
+    "干管/支管坡降\nSlope of main/branch pipes",
+    "0.003 9/0.006"
+   ],
+   [
+    "节点高程\nNode elevation/m",
+    "−7.005~0"
+   ],
+   [
+    "斗管数量\nNumber of laterals",
+    "120"
+   ],
+   [
+    "斗管设计流量\nLateral design flow/(m³·s⁻¹)",
+    "0.012"
+   ],
+   [
+    "最小工作水头\nMinimum working head/m",
+    "11.59"
+   ],
+   [
+    "摩阻系数$f$, $m$, $b$（PE）\nFriction coefficients (PE)",
+    "0.505, 1.75, 4.75"
+   ],
+   [
+    "摩阻系数$f$, $m$, $b$（UPVC）\nFriction coefficients (UPVC)",
+    "0.464, 1.77, 4.77"
+   ]
+  ],
+  "notes": [
+   "注：摩阻系数按GB/T 50485—2020取值，流量单位为L·h⁻¹，管径单位为mm。",
+   "Note: Friction coefficients follow GB/T 50485—2020 with flow in L·h⁻¹ and diameter in mm."
+  ]
+ },
+ "t2": {
+  "cap_cn": "表2  训练分布内各方法的调度结果",
+  "cap_en": "Table 2  Scheduling results of different methods within the training distribution",
+  "widths": [
+   1350,
+   800,
+   800,
+   600,
+   700,
+   640
+  ],
+  "header": [
+   [
+    "方法\nMethod",
+    "$J$/m",
+    "相对差距\nGap/%",
+    "$\\Delta p_{\\min}$/m",
+    "可行率\nFeasible/%",
+    "CPU耗时\nTime/s"
+   ]
+  ],
+  "rows": [
+   "（a）故障重调度（30个场景）  (a) Fault rescheduling (30 scenarios)",
+   [
+    "GNN-IL（本文）\nGNN-IL (ours)",
+    "3.25±1.30",
+    "14.2±12.0",
+    "3.47",
+    "100/90",
+    "0.23"
+   ],
+   [
+    "GNN-IL\n（$\\delta$=0.5 m）",
+    "3.25±1.29",
+    "14.7±13.0",
+    "3.53",
+    "100/100",
+    "0.29"
+   ],
+   [
+    "SA（800+30 000）",
+    "2.98±1.25",
+    "2.7±3.5",
+    "3.94",
+    "100/96",
+    "5.81"
+   ],
+   [
+    "SA-fast\n（10+10 000）",
+    "3.19±1.27",
+    "11.7±12.0",
+    "4.62",
+    "100/99",
+    "1.86"
+   ],
+   [
+    "SA-fast\n（10+2 000）",
+    "3.41±1.27",
+    "21.5±20.4",
+    "5.29",
+    "100/100",
+    "0.44"
+   ],
+   [
+    "GA",
+    "3.36±1.30",
+    "18.3±14.6",
+    "5.19",
+    "100/100",
+    "3.31"
+   ],
+   [
+    "顺序编组\nSequential",
+    "3.54±1.37",
+    "26.3±20.4",
+    "2.74",
+    "100/77",
+    "0.005"
+   ],
+   "（b）全网编组（正常工况，120条斗管，12个水头）  (b) Full-network scheduling (normal operation, 120 laterals, 12 heads)",
+   [
+    "GNN-IL（本文）\nGNN-IL (ours)",
+    "2.44±1.34",
+    "−4.7±21.3",
+    "1.79",
+    "100/67",
+    "0.53"
+   ],
+   [
+    "GNN-IL\n（$\\delta$=0.5 m）",
+    "2.51±1.27",
+    "4.3±32.9",
+    "2.04",
+    "100/100",
+    "0.57"
+   ],
+   [
+    "SA（800+30 000）",
+    "2.92±1.71",
+    "6.0±3.7",
+    "3.75",
+    "100/81",
+    "11.38"
+   ],
+   [
+    "SA-fast\n（10+10 000）",
+    "3.32±1.74",
+    "27.0±15.4",
+    "4.83",
+    "100/97",
+    "2.86"
+   ],
+   [
+    "SA-fast\n（10+2 000）",
+    "3.56±1.71",
+    "42.5±26.2",
+    "5.24",
+    "100/100",
+    "0.60"
+   ],
+   [
+    "GA",
+    "3.37±1.70",
+    "30.9±19.2",
+    "5.09",
+    "100/100",
+    "8.20"
+   ],
+   [
+    "顺序编组\nSequential",
+    "3.09±1.47",
+    "24.4±26.7",
+    "0.84",
+    "100/50",
+    "0.02"
+   ]
+  ],
+  "notes": [
+   "注：（a）30个场景，$H$₀为12~22 m，故障节点为随机田间节点；（b）$H$₀为12~23 m（间隔1 m），全部120条斗管参与编组。$J$与相对差距为场景间均值±标准差，其余为均值；SA、SA-fast和GA先对3个随机种子取平均；相对差距以3次SA中的最优解为基准；可行率为“评价器/EPANET”下压力约束全部满足的场景比例；$\\delta$为硬校核安全裕度；耗时为单个CPU线程。",
+   "Note: (a) 30 scenarios ($H$₀ 12-22 m, random field-node fault); (b) $H$₀ 12-23 m at 1 m steps, all 120 laterals scheduled. J and Gap are mean±std over scenarios, other columns are means; stochastic methods are first averaged over 3 seeds. Gap is relative to the best of 3 SA runs. Feasible: share of scenarios fully feasible under the evaluator/EPANET. $\\delta$: safety margin of the hard check. Time: single CPU thread."
+  ]
+ },
+ "t3": {
+  "cap_cn": "表3  GNN-IL的消融实验结果",
+  "cap_en": "Table 3  Ablation results of GNN-IL",
+  "widths": [
+   1600,
+   800,
+   800,
+   600,
+   560,
+   530
+  ],
+  "header": [
+   [
+    "配置\nConfiguration",
+    "$J$/m",
+    "相对差距\nGap/%",
+    "可行率\nFeasible/%",
+    "CPU耗时\nTime/s",
+    "校核次数\nChecks"
+   ]
+  ],
+  "rows": [
+   [
+    "完整模型\nFull",
+    "3.25±1.30",
+    "14.2±12.0",
+    "100",
+    "0.23",
+    "498"
+   ],
+   [
+    "启用可行性门控\nWith gate",
+    "3.25±1.30",
+    "14.2±12.0",
+    "100",
+    "0.40",
+    "498"
+   ],
+   [
+    "无目标水平择优\nw/o target level",
+    "3.31±1.28",
+    "17.3±15.4",
+    "100",
+    "0.13",
+    "372"
+   ],
+   [
+    "无评价器择优\nw/o ranking",
+    "3.35±1.30",
+    "19.3±16.5",
+    "100",
+    "0.10",
+    "142"
+   ],
+   [
+    "无硬校核\nw/o hard check",
+    "3.35±1.31",
+    "18.7±15.0",
+    "80",
+    "0.10",
+    "120"
+   ],
+   [
+    "无组规模头(k=4)\nw/o size head",
+    "3.25±1.30",
+    "14.2±12.0",
+    "100",
+    "0.23",
+    "498"
+   ],
+   [
+    "无路径先验\nw/o path prior",
+    "3.24±1.27",
+    "14.5±12.1",
+    "100",
+    "0.24",
+    "505"
+   ],
+   [
+    "GCN编码器\nGCN encoder",
+    "3.26±1.27",
+    "15.4±14.7",
+    "100",
+    "0.14",
+    "499"
+   ],
+   [
+    "MLP编码器\nMLP encoder",
+    "3.27±1.29",
+    "15.3±12.5",
+    "100",
+    "0.11",
+    "505"
+   ],
+   [
+    "无锚点（独立打分解码）\nw/o anchor (token decoder)",
+    "4.07±1.31",
+    "50.4±33.4",
+    "100",
+    "0.26",
+    "—"
+   ]
+  ],
+  "notes": [
+   "注：场景与表2相同；校核次数为单场景调用水力评价器的平均次数。",
+   "Note: Same scenarios as Table 2; Checks is the mean number of evaluator calls per scenario."
+  ]
+ },
+ "t4": {
+  "cap_cn": "表4  分布外与复杂工况场景下的调度结果",
+  "cap_en": "Table 4  Scheduling results under out-of-distribution and complex scenarios",
+  "widths": [
+   900,
+   820,
+   450,
+   650,
+   750,
+   600,
+   720
+  ],
+  "header": [
+   [
+    "场景集\nScenario set",
+    "方法\nMethod",
+    "场景数\nN",
+    "服务率\nServed/%",
+    "EPANET\n可行率/%\nFeasible/%",
+    "$J$/m",
+    "耗时\nTime/s"
+   ]
+  ],
+  "rows": [
+   [
+    "低水头外推\nLow head",
+    "GNN-IL\n$\\delta$=0",
+    "6",
+    "91",
+    "100",
+    "0.67",
+    "0.40"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "6",
+    "91",
+    "100",
+    "0.91",
+    "0.53"
+   ],
+   [
+    "",
+    "SA",
+    "6",
+    "0",
+    "0",
+    "—",
+    "37.91"
+   ],
+   [
+    "",
+    "SA-fast",
+    "6",
+    "0",
+    "0",
+    "—",
+    "0.49"
+   ],
+   [
+    "高水头外推\nHigh head",
+    "GNN-IL\n$\\delta$=0",
+    "8",
+    "100",
+    "100",
+    "6.95",
+    "0.29"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "8",
+    "100",
+    "100",
+    "6.95",
+    "0.35"
+   ],
+   [
+    "",
+    "SA",
+    "8",
+    "100",
+    "100",
+    "6.69",
+    "10.12"
+   ],
+   [
+    "",
+    "SA-fast",
+    "8",
+    "100",
+    "100",
+    "7.00",
+    "2.20"
+   ],
+   [
+    "干管故障\nMain-pipe fault",
+    "GNN-IL\n$\\delta$=0",
+    "7",
+    "100",
+    "86",
+    "2.04",
+    "0.21"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "7",
+    "100",
+    "100",
+    "2.03",
+    "0.21"
+   ],
+   [
+    "",
+    "SA",
+    "7",
+    "100",
+    "57",
+    "1.70",
+    "5.46"
+   ],
+   [
+    "",
+    "SA-fast",
+    "7",
+    "100",
+    "86",
+    "2.03",
+    "1.60"
+   ],
+   [
+    "多点并发故障\nMulti-node fault",
+    "GNN-IL\n$\\delta$=0",
+    "10",
+    "100",
+    "60",
+    "3.07",
+    "0.27"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "10",
+    "100",
+    "100",
+    "3.14",
+    "0.31"
+   ],
+   [
+    "",
+    "SA",
+    "10",
+    "100",
+    "80",
+    "2.68",
+    "7.60"
+   ],
+   [
+    "",
+    "SA-fast",
+    "10",
+    "100",
+    "100",
+    "2.99",
+    "2.03"
+   ],
+   [
+    "故障+水头骤降\nFault+head drop",
+    "GNN-IL\n$\\delta$=0",
+    "8",
+    "100",
+    "75",
+    "2.22",
+    "0.31"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "8",
+    "100",
+    "100",
+    "2.30",
+    "0.38"
+   ],
+   [
+    "",
+    "SA",
+    "8",
+    "100",
+    "75",
+    "1.89",
+    "8.90"
+   ],
+   [
+    "",
+    "SA-fast",
+    "8",
+    "100",
+    "88",
+    "2.19",
+    "2.32"
+   ],
+   [
+    "阀门局部堵塞\nValve blockage",
+    "GNN-IL\n$\\delta$=0",
+    "10",
+    "100",
+    "90",
+    "3.30",
+    "0.26"
+   ],
+   [
+    "",
+    "GNN-IL\n$\\delta$=0.5 m",
+    "10",
+    "100",
+    "100",
+    "3.25",
+    "0.27"
+   ],
+   [
+    "",
+    "SA",
+    "10",
+    "100",
+    "90",
+    "2.97",
+    "7.05"
+   ],
+   [
+    "",
+    "SA-fast",
+    "10",
+    "100",
+    "100",
+    "3.25",
+    "2.00"
+   ]
+  ],
+  "notes": [
+   "注：模型未重新训练。服务率为获得可行灌水安排的斗管占故障后待灌斗管的比例，SA和SA-fast在无完整可行方案时记为0；EPANET可行率为全部轮灌组在EPANET复核下均满足压力约束的场景比例；$\\delta$为硬校核安全裕度。",
+   "Note: No retraining. Served: share of remaining laterals that receive a feasible group (0 for SA/SA-fast when no complete feasible schedule exists). EPANET feasible: share of scenarios in which every group satisfies the pressure constraint in EPANET; $\\delta$ is the safety margin of the hard check."
+  ]
+ }
+}

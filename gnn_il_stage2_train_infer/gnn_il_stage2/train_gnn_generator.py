@@ -26,6 +26,7 @@ def parse_args():
     ap.add_argument("--dropout", type=float, default=0.1)
     ap.add_argument("--lambda_size", type=float, default=0.2)
     ap.add_argument("--pos_weight", type=float, default=0.0)
+    ap.add_argument("--encoder", default="fusion", choices=["fusion", "gcn", "mlp"])
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     return ap.parse_args()
 
@@ -68,7 +69,8 @@ def main():
         edge_attr_dim=graph.edge_attr.shape[1],
         hidden_dim=args.hidden,
         num_layers=args.layers,
-        dropout=args.dropout
+        dropout=args.dropout,
+        encoder=args.encoder
     ).to(device)
 
     bce = nn.BCEWithLogitsLoss(pos_weight=pos_w.to(device))
@@ -175,6 +177,7 @@ def main():
                     "dropout": args.dropout,
                     "lambda_size": args.lambda_size,
                     "pos_weight": float(pos_w.item()),
+                    "encoder": args.encoder,
                 },
                 "meta": {"root": meta.get("root","J0"), "node_ids": meta["node_ids"], "lateral_ids": meta["lateral_ids"]},
             }

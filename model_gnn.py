@@ -74,10 +74,48 @@ class NodeEdgeFusionEncoder(nn.Module):
         return node_h
 
 
-class GroupGenerator(nn.Module):
+class GCNEncoder(nn.Module):
+    """Ablation: classic GCN (symmetric-normalised adjacency, node features only; pipe attributes ignored)."""
     def __init__(self, node_in_dim: int, edge_attr_dim: int, hidden_dim: int = 128, num_layers: int = 4, dropout: float = 0.1):
         super().__init__()
-        self.encoder = NodeEdgeFusionEncoder(node_in_dim, edge_attr_dim, hidden_dim, num_layers, dropout)
+        self.node_proj = nn.Linear(node_in_dim, hidden_dim)
+        self.lins = nn.ModuleList([nn.Linear(hidden_dim, hidden_dim) for _ in range(num_layers)])
+        self.lns = nn.ModuleList([nn.LayerNorm(hidden_dim) for _ in range(num_layers)])
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, node_x, edge_index, edge_attr):
+        N = node_x.size(0)
+        loops = torch.arange(N, device=node_x.device)
+        src = torch.cat([edge_index[0], loops]); dst = torch.cat([edge_index[1], loops])
+        deg = torch.zeros(N, device=node_x.device).index_add_(0, dst, torch.ones_like(dst, dtype=torch.float))
+        w = (deg[src] * deg[dst]).rsqrt().unsqueeze(-1)
+        h = self.dropout(F.relu(self.node_proj(node_x)))
+        for lin, ln in zip(self.lins, self.lns):
+            m = scatter_add(lin(h)[src] * w, dst, N)
+            h = ln(h + self.dropout(F.relu(m)))
+        return h
+
+
+class MLPEncoder(nn.Module):
+    """Ablation: no message passing (graph structure and pipe attributes removed)."""
+    def __init__(self, node_in_dim: int, edge_attr_dim: int, hidden_dim: int = 128, num_layers: int = 4, dropout: float = 0.1):
+        super().__init__()
+        layers = [nn.Linear(node_in_dim, hidden_dim), nn.ReLU()]
+        for _ in range(num_layers - 1):
+            layers += [nn.Dropout(dropout), nn.Linear(hidden_dim, hidden_dim), nn.ReLU()]
+        self.net = nn.Sequential(*layers)
+
+    def forward(self, node_x, edge_index, edge_attr):
+        return self.net(node_x)
+
+
+ENCODERS = {"fusion": NodeEdgeFusionEncoder, "gcn": GCNEncoder, "mlp": MLPEncoder}
+
+
+class GroupGenerator(nn.Module):
+    def __init__(self, node_in_dim: int, edge_attr_dim: int, hidden_dim: int = 128, num_layers: int = 4, dropout: float = 0.1, encoder: str = "fusion"):
+        super().__init__()
+        self.encoder = ENCODERS[encoder](node_in_dim, edge_attr_dim, hidden_dim, num_layers, dropout)
         self.side_emb = nn.Embedding(2, hidden_dim)
         self.h0_mlp = MLP(1, hidden_dim, hidden_dim, dropout=dropout)
 

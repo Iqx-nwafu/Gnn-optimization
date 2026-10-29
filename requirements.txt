@@ -1,4 +1,7 @@
+# tested with Python 3.13, torch 2.15 (CPU), wntr 1.5, matplotlib 3.11, pandas 3.0, numpy 2.5
+numpy
 pandas
 openpyxl
 torch
-numpy
+matplotlib
+wntr        # EPANET 2.2 cross-check (experiments/epanet_check.py)
